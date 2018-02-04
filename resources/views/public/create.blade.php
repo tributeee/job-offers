@@ -4,13 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                @if(session('errors'))
+                @if ($errors->any())
                     <div class="alert-danger">
-                        @if ($errors->any())
-                            <ul>
-                                {!! implode('', $errors->all('<li>:message</li>')) !!}
-                            </ul>
-                        @endif
+                        <ul>
+                            {!! implode('', $errors->all('<li>:message</li>')) !!}
+                        </ul>
                     </div>
                 @endif
                 <form method="POST" action="">
