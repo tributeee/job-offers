@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/', 'JobOffersController@list');
+Route::get('/create', 'JobOffersController@create');
+Route::get('/{id}', 'JobOffersController@show');
+Route::post('/create', 'JobOffersController@save');
