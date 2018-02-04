@@ -11,15 +11,19 @@ use Illuminate\Notifications\Messages\MailMessage;
 class JobOfferPosted extends Notification
 {
     use Queueable;
+    /**
+     * @var JobOffer
+     */
+    private $offer;
 
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param JobOffer $offer
      */
     public function __construct(JobOffer $offer)
     {
-        //
+        $this->offer = $offer;
     }
 
     /**
@@ -41,6 +45,10 @@ class JobOfferPosted extends Notification
      */
     public function toMail($notifiable)
     {
+        $title = $this->offer->title;
+        $desctiption = $this->offer->description;
+        
+
         return (new MailMessage)
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))

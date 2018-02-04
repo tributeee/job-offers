@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\JobOfferCreateRequest;
+use App\JobOffer;
 use App\Services\JobOfferService;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class JobOffersController extends Controller
 {
@@ -27,9 +30,13 @@ class JobOffersController extends Controller
      * 
      * @return mixed
      */
-    public function list()
+    public function list(Request $request)
     {
-        $offers = $this->jobOffer->list();
+        $status = $request->get('status');
+        if (!in_array($status, [JobOffer::STATUS_SPAM, JobOffer::STATUS_PUBLISHED, JobOffer::STATUS_PENDING])) {
+            $status = null;
+        }
+        $offers = $this->jobOffer->list($status);
         return view('public.index', compact('offers'));
     }
 
@@ -42,6 +49,10 @@ class JobOffersController extends Controller
     public function show($id)
     {
         $offer = $this->jobOffer->get($id);
+        if (!$offer) {
+            throw new NotFoundHttpException();
+        }
+
         return view('public.show', compact('offer'));
     }
 
@@ -63,8 +74,26 @@ class JobOffersController extends Controller
         return redirect('/')->with('message', 'Successfully created!');
     }
 
-    public function updateStatus($id, $status)
+    public function updateStatus($id, $action)
     {
-        $this->jobOffer->updateStatus($id, $status);
+        $offer = $this->jobOffer->get($id);
+
+        if (!$offer) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!in_array($action, ['publish', 'mark-spam'])) {
+            return redirect()->to('/' . $id)->with([
+                'message' => 'Invalid status!',
+                'class' => 'danger'
+            ]);
+        }
+
+        $this->jobOffer->updateStatus($offer, $action);
+
+        return redirect()->to('/' . $id)->with([
+            'message' => 'Status successfully updated!',
+            'class' => 'success'
+        ]);
     }
 }

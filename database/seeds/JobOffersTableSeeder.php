@@ -22,7 +22,7 @@ class JobOffersTableSeeder extends Seeder
             $offer->email = $faker->email;
             $offer->title = $faker->jobTitle;
             $offer->description = $faker->text();
-            $offer->status = rand(1, 3);
+            $offer->status = $faker->randomElement([\App\JobOffer::STATUS_PENDING, \App\JobOffer::STATUS_SPAM, \App\JobOffer::STATUS_PUBLISHED]);
             $offer->save();
         }
     }

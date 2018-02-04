@@ -18,7 +18,7 @@ class CreateJobOffersTable extends Migration
             $table->string('email');
             $table->string('title');
             $table->text('description');
-            $table->integer('status')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

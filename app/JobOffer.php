@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class JobOffer extends Model
 {
-    const STATUS_PENDING = 1;
-    const STATUS_PUBLISHED = 2;
-    const STATUS_SPAM = 3;
+    const STATUS_PENDING = 'pending';
+    const STATUS_PUBLISHED = 'published';
+    const STATUS_SPAM = 'spam';
 
     protected $fillable = [
         'email', 'title', 'description', 'status'

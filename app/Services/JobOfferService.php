@@ -4,16 +4,22 @@ namespace App\Services;
 
 use App\Events\JobOfferPosted;
 use App\JobOffer;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class JobOfferService
 {
     /**
-     * @return mixed
+     * Get all Job Offers
+     *
+     * @return Collection
      */
-    public function list()
+    public function list($status = null)
     {
         if (Auth::check()) {
+            if ($status) {
+                return JobOffer::where('status', $status)->get()->sortByDesc('created_at');
+            }
             return JobOffer::all()->sortByDesc('created_at');
         }
 
@@ -21,14 +27,22 @@ class JobOfferService
     }
 
     /**
+     * Get Job Offer
+     *
      * @param $id
-     * @return mixed
+     * @return JobOffer
      */
     public function get($id)
     {
         return JobOffer::find($id);
     }
 
+    /**
+     * Create Job Offer
+     *
+     * @param array $data
+     * @return mixed
+     */
     public function create(array $data)
     {
         $hasPrevious = JobOffer::where([
@@ -49,12 +63,18 @@ class JobOfferService
         return $offer;
     }
 
-    public function updateStatus($id, $status)
+    /**
+     * Update Job Offer Status
+     *
+     * @param JobOffer $offer
+     * @param $action
+     * @return bool
+     */
+    public function updateStatus(JobOffer $offer, $action)
     {
-        $offer = JobOffer::find($id);
-        $offer->status = $status;
+        $offer->status = $action == 'publish' ? JobOffer::STATUS_PUBLISHED : JobOffer::STATUS_SPAM;
         $offer->save();
 
-        return $offer;
+        return true;
     }
 }
