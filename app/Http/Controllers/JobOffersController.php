@@ -37,7 +37,7 @@ class JobOffersController extends Controller
             $status = null;
         }
         $offers = $this->jobOffer->list($status);
-        return view('public.index', compact('offers'));
+        return view('job-offers.index', compact('offers'));
     }
 
     /**
@@ -53,12 +53,12 @@ class JobOffersController extends Controller
             throw new NotFoundHttpException();
         }
 
-        return view('public.show', compact('offer'));
+        return view('job-offers.show', compact('offer'));
     }
 
     public function create()
     {
-        return view('public.create');
+        return view('job-offers.create');
     }
 
     /**
@@ -74,6 +74,13 @@ class JobOffersController extends Controller
         return redirect('/')->with('message', 'Successfully created!');
     }
 
+    /**
+     * Update Job Offer Status
+     *
+     * @param $id
+     * @param $action
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateStatus($id, $action)
     {
         $offer = $this->jobOffer->get($id);

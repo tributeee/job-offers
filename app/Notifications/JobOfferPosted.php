@@ -45,14 +45,10 @@ class JobOfferPosted extends Notification
      */
     public function toMail($notifiable)
     {
-        $title = $this->offer->title;
-        $desctiption = $this->offer->description;
-        
+        $offer = $this->offer;
 
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        return (new MailMessage)->subject('New job offer waiting for your approval')
+                    ->view('emails.notify_moderator', compact('offer'));
     }
 
     /**
