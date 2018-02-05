@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 @if(session('message'))
-                    <p class="alert-{{ session('class') }}">{{ session('message') }}</p>
+                    <p class="alert-{{ session('class') }} p15">{{ session('message') }}</p>
                 @endif
                 <div class="panel panel-default">
                     <div class="panel-heading">

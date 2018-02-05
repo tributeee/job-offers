@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 @if ($errors->any())
-                    <div class="alert-danger">
+                    <div class="alert-danger p15tb">
                         <ul>
                             {!! implode('', $errors->all('<li>:message</li>')) !!}
                         </ul>

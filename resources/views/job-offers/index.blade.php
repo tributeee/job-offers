@@ -14,9 +14,7 @@
                 @endauth
                 <div class="list-group">
                     @if(session('message'))
-                        <div class="alert-success">
-                            <h4 class="text-center">{{ session('message') }}</h4>
-                        </div>
+                        <p class="alert-success p15">{{ session('message') }}</p>
                     @endif
                     @if(!$offers)
                         <h4 class="list-group-item">No Job Offers Yet!</h4>
