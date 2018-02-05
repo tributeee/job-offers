@@ -21,6 +21,7 @@
                     @else
                         @foreach($offers as $offer)
                             <a href="/{{ $offer->id }}" class="list-group-item">
+                                {{ $offer->created_at }}
                                 <h4 class="list-group-item-heading">{{ $offer->title }}</h4>
                                 @auth
                                     <p class="text-{{ $offer->status == \App\JobOffer::STATUS_PUBLISHED ? 'success' : ($offer->status == \App\JobOffer::STATUS_SPAM ? 'danger' : 'warning') }}">
@@ -31,6 +32,7 @@
                                 <p class="text-right help-block">{{ $offer->email }}</p>
                             </a>
                         @endforeach
+                        {{ $offers->links() }}
                     @endif
                 </div>
             </div>

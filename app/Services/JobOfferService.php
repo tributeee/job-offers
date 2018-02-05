@@ -18,12 +18,12 @@ class JobOfferService
     {
         if (Auth::check()) {
             if ($status) {
-                return JobOffer::where('status', $status)->get()->sortByDesc('created_at');
+                return JobOffer::where('status', $status)->orderByDesc('created_at')->paginate(10);
             }
-            return JobOffer::all()->sortByDesc('created_at');
+            return JobOffer::orderByDesc('created_at')->paginate(10);
         }
 
-        return JobOffer::where('status', JobOffer::STATUS_PUBLISHED)->get()->sortByDesc('created_at');
+        return JobOffer::where('status', JobOffer::STATUS_PUBLISHED)->orderByDesc('created_at')->paginate(10);
     }
 
     /**
