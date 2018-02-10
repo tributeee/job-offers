@@ -5,7 +5,6 @@ namespace Tests\Unit;
 use App\JobOffer;
 use App\Services\JobOfferService;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class JobOfferTest extends TestCase
@@ -21,14 +20,16 @@ class JobOfferTest extends TestCase
         $this->jobOfferService = new JobOfferService();
     }
 
-    public function testCreatePendingJobOffer()
+    /** @test */
+    public function createPendingJobOffer()
     {
         $offer = $this->createOffer();
 
         $this->assertEquals(JobOffer::STATUS_PENDING, $offer->status);
     }
 
-    public function testJobOfferChangeStatusToPublished()
+    /** @test */
+    public function jobOfferChangeStatusToPublished()
     {
         $offer = $this->createOffer();
 
@@ -37,7 +38,8 @@ class JobOfferTest extends TestCase
         $this->assertEquals(JobOffer::STATUS_PUBLISHED, $offer->status);
     }
 
-    public function testJobOfferChangeStatusToSpam()
+    /** @test */
+    public function jobOfferChangeStatusToSpam()
     {
         $offer = $this->createOffer();
 
@@ -46,7 +48,8 @@ class JobOfferTest extends TestCase
         $this->assertEquals(JobOffer::STATUS_SPAM, $offer->status);
     }
 
-    public function testSecondJobOfferStatusPublished()
+    /** @test */
+    public function secondJobOfferStatusPublished()
     {
         $offer = $this->createOffer();
 
