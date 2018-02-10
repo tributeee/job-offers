@@ -88,12 +88,12 @@
 
             @include('emails.partials.button', [
                 'text' => 'Publish',
-                'url' => config('app.url') . $offer->id . '/publish'
+                'url' => config('app.url') . '/' . $offer->id . '/publish'
             ])
 
             @include('emails.partials.button', [
                 'text' => 'Mark Spam',
-                'url' =>  config('app.url') . $offer->id . '/mark-spam'
+                'url' =>  config('app.url') . '/' . $offer->id . '/mark-spam'
             ])
 
             <table class="mcnTextBlock" style="min-width:100%;" width="100%" cellspacing="0" cellpadding="0" border="0">
