@@ -4,12 +4,12 @@ namespace Tests\Unit;
 
 use App\JobOffer;
 use App\Services\JobOfferService;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class JobOfferTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     protected $jobOfferService;
 

@@ -16,7 +16,7 @@
                     @if(session('message'))
                         <p class="alert-success p15">{{ session('message') }}</p>
                     @endif
-                    @if(!$offers)
+                    @if(empty($offers->items()))
                         <h4 class="list-group-item">No Job Offers Yet!</h4>
                     @else
                         @foreach($offers as $offer)

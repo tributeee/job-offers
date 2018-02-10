@@ -93,7 +93,7 @@
 
             @include('emails.partials.button', [
                 'text' => 'Mark Spam',
-                'url' =>  config('app.url') . $offer->id . '/Mark Spam'
+                'url' =>  config('app.url') . $offer->id . '/mark-spam'
             ])
 
             <table class="mcnTextBlock" style="min-width:100%;" width="100%" cellspacing="0" cellpadding="0" border="0">

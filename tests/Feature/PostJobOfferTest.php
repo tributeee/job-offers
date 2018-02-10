@@ -2,10 +2,13 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class PostJobOfferTest extends TestCase
 {
+    use DatabaseTransactions;
+
     public function setUp()
     {
         parent::setUp();
